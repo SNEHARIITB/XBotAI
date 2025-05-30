@@ -3,7 +3,7 @@ import { useState } from 'react';
 import ChatInput from '../Components/ChatInput';
 import ChatWindow from '../Components/ChatWindow';
 import ChatLines from '../Components/Chatlines';
-import Sidebar from '../Components/Sidebar';
+import Sidebar from '../Components/Sideoner';
 import BoTimg from "../assets/Botimg.png";
 import styles from "./ChatPage.module.css";
 
