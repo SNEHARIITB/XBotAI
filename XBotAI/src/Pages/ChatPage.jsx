@@ -4,6 +4,8 @@ import ChatInput from '../Components/ChatInput';
 import { useState } from 'react';
 import ChatWindow from '../Components/ChatWindow';
 import BoTimg from "../assets/Botimg.png";
+import Sidebar from "../Components/Sidebar";
+import styles from "./ChatPage.module.css";
 
 const ChatPage = () => {
 
@@ -17,7 +19,8 @@ const ChatPage = () => {
     };
 
     return(
-        <Box>
+        <Box className={styles.container}>
+            <Sidebar/>
 
             <Box>
 
