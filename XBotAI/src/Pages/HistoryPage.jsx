@@ -6,7 +6,7 @@ const HistoryPage = () => {
 
   useEffect(() => {
     const storedChats = JSON.parse(localStorage.getItem('chatHistory')) || [];
-    setHistoryData(storedChats.reverse()); // Optional: newest first
+    setHistoryData(storedChats.reverse()); 
   }, []);
 
   return (
