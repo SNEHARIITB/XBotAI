@@ -6,7 +6,7 @@ const ChatInput = ({ input, setInput, handleSend, handleSave }) => {
     <Box display="flex" mt={2} gap={2}>
       <TextField
         fullWidth
-        placeholder="Message Bot AI…"
+        placeholder="Message Bot AI..."
         variant="outlined"
         value={input}
         onChange={(e) => setInput(e.target.value)}

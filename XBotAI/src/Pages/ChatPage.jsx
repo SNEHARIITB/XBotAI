@@ -7,6 +7,8 @@ import Sidebar from '../Components/Sideoner';
 import BoTimg from "../assets/BoTimg.png";
 import styles from "./ChatPage.module.css";
 
+import data from "../../src/sampleData.json"
+
 const ChatPage = () => {
   const [input, setInput] = useState("");
   const [chat, setChat] = useState([]);
@@ -114,15 +116,33 @@ const ChatPage = () => {
   );
 };
 
-const getBotReply = (question) => {
-  const responses = {
-    'hi, what is the weather': 'It’s sunny and 28°C today.',
-    'hi, what is my location': 'I cannot determine your location.',
-    'hi, what is the temperature': 'It’s currently 28°C.',
-    'hi, how are you': 'I’m just code, but thank you for asking!',
-    'hi': 'Hi to you',
-  };
-  return responses[question.toLowerCase()] || 'Sorry, Did not understand your query!';
-};
+// const getBotReply = (question) => {
+// //   const responses = {
+// //     'hi, what is the weather': 'It’s sunny and 28°C today.',
+// //     'hi, what is my location': 'I cannot determine your location.',
+// //     'hi, what is the temperature': 'It’s currently 28°C.',
+// //     'hi, how are you': 'I’m just code, but thank you for asking!',
+// //     'hi': 'Hi to you',
+// //   };
+//   return data[question.toLowerCase()] || //'Sorry, Did not understand your query!';
+// };
+
+
+function getBotReply(userQuestion) {
+  // Normalize user input to lowercase for simple matching
+  const normalizedQuestion = userQuestion.toLowerCase();
+
+  // Find the FAQ item whose question includes the user question (case-insensitive)
+  const matchedFAQ = data.find(faq =>
+    faq.question.toLowerCase().includes(normalizedQuestion) ||
+    normalizedQuestion.includes(faq.question.toLowerCase())
+  );
+
+  if (matchedFAQ) {
+    return matchedFAQ.response;
+  } else {
+    return "Sorry, I don't have an answer to that question right now.";
+  }
+}
 
 export default ChatPage;
