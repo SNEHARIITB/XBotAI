@@ -40,7 +40,7 @@ const Sidebar = () => {
               selected={selected}
               onClick={() => {
                 navigate(item.path);
-                if (isMobile) setOpen(false); // Close drawer on mobile after navigation
+                if (isMobile) setOpen(false); 
               }}
               sx={{
                 justifyContent: isMobile ? 'center' : 'flex-start',
