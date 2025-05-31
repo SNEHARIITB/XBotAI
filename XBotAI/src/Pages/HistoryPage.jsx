@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Typography, Paper, Rating, Divider } from '@mui/material';
+import Sidebar from '../Components/Sideoner';
 
 const HistoryPage = () => {
   const [historyData, setHistoryData] = useState([]);
@@ -10,7 +11,10 @@ const HistoryPage = () => {
   }, []);
 
   return (
-    <Box p={3} sx={{ overflowY: 'auto', maxHeight: '100vh' }}>
+    <Box sx={{display: 'flex'}}>
+    <Sidebar/>
+
+        <Box p={3} sx={{ overflowY: 'auto', maxHeight: '100vh' }}>
       {/* <Typography variant="h5" gutterBottom fontWeight="bold">
         Past Conversations & Feedback
       </Typography> */}
@@ -53,6 +57,9 @@ const HistoryPage = () => {
         ))
       )}
     </Box>
+
+    </Box>
+
   );
 };
 

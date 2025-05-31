@@ -22,8 +22,8 @@ const Sidebar = () => {
   const location = useLocation();
 
   const items = [
-    { text: 'Chat', icon: <ChatBubbleOutlineIcon />, path: '/' },
-    { text: 'History', icon: <HistoryIcon />, path: '/history' },
+    { text: 'New Chat', icon: <ChatBubbleOutlineIcon />, path: '/' },
+    { text: 'Past Conversations', icon: <HistoryIcon />, path: '/history' },
   ];
 
   const drawerContent = (
@@ -38,6 +38,7 @@ const Sidebar = () => {
           >
             <ListItemButton
               selected={selected}
+              component="a"
               onClick={() => {
                 navigate(item.path);
                 if (isMobile) setOpen(false); 
@@ -57,8 +58,8 @@ const Sidebar = () => {
               </ListItemIcon>
               {!isMobile && <ListItemText primary={item.text} />}
             </ListItemButton>
-            {item.text == "History" && <a href="/history">Past Conversations</a>}
-            {item.text == "Chat" && <a href="/">New Chat</a>}
+            {/* {item.text == "History" && <a href="/history">Past Conversations</a>}
+            {item.text == "Chat" && <a href="/">New Chat</a>} */}
           </Tooltip>
         );
       })}

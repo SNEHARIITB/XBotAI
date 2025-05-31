@@ -60,7 +60,10 @@ const ChatPage = () => {
       <Sidebar />
 
       <Box className={styles.mainContent}>
-        <h1>Bot AI</h1>
+        <header>
+          <h1>Bot AI</h1>
+        </header>
+
         <Box className={styles.chatBox}>
           <Typography variant="h6" sx={{ mb: 2 }}>
             How Can I Help You Today?
