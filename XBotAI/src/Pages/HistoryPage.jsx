@@ -11,9 +11,10 @@ const HistoryPage = () => {
 
   return (
     <Box p={3} sx={{ overflowY: 'auto', maxHeight: '100vh' }}>
-      <Typography variant="h5" gutterBottom fontWeight="bold">
+      {/* <Typography variant="h5" gutterBottom fontWeight="bold">
         Past Conversations & Feedback
-      </Typography>
+      </Typography> */}
+      <div>Past Conversations</div>
 
       {historyData.length === 0 ? (
         <Typography variant="body1" sx={{ mt: 2 }}>

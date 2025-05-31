@@ -141,7 +141,7 @@ function getBotReply(userQuestion) {
   if (matchedFAQ) {
     return matchedFAQ.response;
   } else {
-    return "Sorry, I don't have an answer to that question right now.";
+    return "Sorry, Did not understand your query!";
   }
 }
 
