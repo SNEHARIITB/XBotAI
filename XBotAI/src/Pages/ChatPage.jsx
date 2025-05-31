@@ -29,7 +29,8 @@ const ChatPage = () => {
   };
 
   const handleSave = () => {
-    setShowFeedbackModal(true);
+    //setShowFeedbackModal(true);
+    handleSubmitFeedback();
   };
 
   const handleSubmitFeedback = () => {
