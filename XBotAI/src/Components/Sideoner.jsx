@@ -1,9 +1,19 @@
 import React, { useState } from 'react';
-import { Drawer, IconButton, Box, useMediaQuery } from '@mui/material';
+import {
+  Drawer,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  useMediaQuery,
+  Tooltip,
+  IconButton,
+  Box,
+} from '@mui/material';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import HistoryIcon from '@mui/icons-material/History';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Sidebar = () => {
   const isMobile = useMediaQuery('(max-width:600px)');
@@ -16,50 +26,41 @@ const Sidebar = () => {
   ];
 
   const drawerContent = (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        pt: 2,
-      }}
-    >
-      {items.map(({ text, icon, path }) => {
-        const selected = location.pathname === path;
+    <List>
+      {items.map((item) => {
+        const selected = location.pathname === item.path;
         return (
-          <a
-            key={text}
-            href={path}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              padding: '12px 16px',
-              textDecoration: 'none',
-              color: selected ? '#000' : '#555',
-              backgroundColor: selected ? '#d0cbff' : 'transparent',
-              borderRadius: 4,
-              marginBottom: 8,
-              justifyContent: isMobile ? 'center' : 'flex-start',
-            }}
-            onClick={() => {
-              if (isMobile) setOpen(false);
-            }}
+          <Tooltip
+            title={isMobile ? item.text : ''}
+            placement="right"
+            key={item.text}
           >
-            <Box
+            <ListItemButton
+              component={Link}
+              to={item.path}
+              selected={selected}
+              onClick={() => {
+                if (isMobile) setOpen(false);
+              }}
               sx={{
-                mr: isMobile ? 0 : 1.5,
-                display: 'flex',
-                justifyContent: 'center',
-                width: 24,
-                color: selected ? '#000' : '#555',
+                justifyContent: isMobile ? 'center' : 'flex-start',
+                px: 2,
+                py: 1.5,
+                backgroundColor: selected ? '#d0cbff' : 'inherit',
+                '&:hover': {
+                  backgroundColor: '#e0e0e0',
+                },
               }}
             >
-              {icon}
-            </Box>
-            {!isMobile && <span>{text}</span>}
-          </a>
+              <ListItemIcon sx={{ minWidth: 0, mr: isMobile ? 0 : 2 }}>
+                {item.icon}
+              </ListItemIcon>
+              {!isMobile && <ListItemText primary={item.text} />}
+            </ListItemButton>
+          </Tooltip>
         );
       })}
-    </Box>
+    </List>
   );
 
   return (
@@ -92,7 +93,6 @@ const Sidebar = () => {
             boxSizing: 'border-box',
             backgroundColor: '#f5f5f5',
             borderRight: '1px solid #ddd',
-            paddingTop: 8,
           },
         }}
       >
