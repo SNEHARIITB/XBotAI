@@ -57,6 +57,8 @@ const Sidebar = () => {
               </ListItemIcon>
               {!isMobile && <ListItemText primary={item.text} />}
             </ListItemButton>
+            {item.text == "History" && <a href="/history">Past Conversations</a>}
+            {item.text == "Chat" && <a href="/">New Chat</a>}
           </Tooltip>
         );
       })}
