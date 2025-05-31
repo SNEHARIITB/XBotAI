@@ -1,24 +1,13 @@
 import React, { useState } from 'react';
-import {
-  Drawer,
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  useMediaQuery,
-  Tooltip,
-  IconButton,
-  Box,
-} from '@mui/material';
+import { Drawer, IconButton, Box, useMediaQuery } from '@mui/material';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import HistoryIcon from '@mui/icons-material/History';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const Sidebar = () => {
   const isMobile = useMediaQuery('(max-width:600px)');
   const [open, setOpen] = useState(false);
-  const navigate = useNavigate();
   const location = useLocation();
 
   const items = [
@@ -27,43 +16,50 @@ const Sidebar = () => {
   ];
 
   const drawerContent = (
-    <List>
-      {items.map((item) => {
-        const selected = location.pathname === item.path;
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        pt: 2,
+      }}
+    >
+      {items.map(({ text, icon, path }) => {
+        const selected = location.pathname === path;
         return (
-          <Tooltip
-            title={isMobile ? item.text : ''}
-            placement="right"
-            key={item.text}
+          <a
+            key={text}
+            href={path}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              padding: '12px 16px',
+              textDecoration: 'none',
+              color: selected ? '#000' : '#555',
+              backgroundColor: selected ? '#d0cbff' : 'transparent',
+              borderRadius: 4,
+              marginBottom: 8,
+              justifyContent: isMobile ? 'center' : 'flex-start',
+            }}
+            onClick={() => {
+              if (isMobile) setOpen(false);
+            }}
           >
-            <ListItemButton
-              selected={selected}
-              component="a"
-              onClick={() => {
-                navigate(item.path);
-                if (isMobile) setOpen(false); 
-              }}
+            <Box
               sx={{
-                justifyContent: isMobile ? 'center' : 'flex-start',
-                px: 2,
-                py: 1.5,
-                backgroundColor: selected ? '#d0cbff' : 'inherit',
-                '&:hover': {
-                  backgroundColor: '#e0e0e0',
-                },
+                mr: isMobile ? 0 : 1.5,
+                display: 'flex',
+                justifyContent: 'center',
+                width: 24,
+                color: selected ? '#000' : '#555',
               }}
             >
-              <ListItemIcon sx={{ minWidth: 0, mr: isMobile ? 0 : 2 }}>
-                {item.icon}
-              </ListItemIcon>
-              {!isMobile && <ListItemText primary={item.text} />}
-            </ListItemButton>
-            {/* {item.text == "History" && <a href="/history">Past Conversations</a>}
-            {item.text == "Chat" && <a href="/">New Chat</a>} */}
-          </Tooltip>
+              {icon}
+            </Box>
+            {!isMobile && <span>{text}</span>}
+          </a>
         );
       })}
-    </List>
+    </Box>
   );
 
   return (
@@ -77,7 +73,7 @@ const Sidebar = () => {
             zIndex: 1300,
           }}
         >
-          <IconButton onClick={() => setOpen(true)}>
+          <IconButton onClick={() => setOpen(true)} aria-label="Open menu">
             <MenuIcon />
           </IconButton>
         </Box>
@@ -89,13 +85,14 @@ const Sidebar = () => {
         open={isMobile ? open : true}
         onClose={() => setOpen(false)}
         sx={{
-          width: isMobile ? 60 : 200,
+          width: 200,
           flexShrink: 0,
           '& .MuiDrawer-paper': {
-            width: isMobile ? 200 : 200,
+            width: 200,
             boxSizing: 'border-box',
             backgroundColor: '#f5f5f5',
             borderRight: '1px solid #ddd',
+            paddingTop: 8,
           },
         }}
       >
